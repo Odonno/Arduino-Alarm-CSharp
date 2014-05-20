@@ -42,6 +42,18 @@ namespace ArduinoAlarm.Model
             SerialPort.Close();
         }
 
+        public void SwitchBuzzer(bool on = false)
+        {
+            SerialPort.Open();
+
+            byte onByte = on ? (byte)1 : (byte)0;
+
+            // Send command byte + boolean byte
+            SerialPort.Write(new[] { (byte)2, onByte }, 0, 2);
+
+            SerialPort.Close();
+        }
+
         public void SwitchLeds(bool on = false)
         {
             SerialPort.Open();

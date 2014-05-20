@@ -23,10 +23,17 @@
             <Button x:Name="btEteindreLed"  Content="Eteindre les LED" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btEteindreLed_Click" />
         </Grid>-->
 
-        <Button x:Name="btAllumerLed" Content="Allumer les LED" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btAllumerLed_Click" />
-        <Button x:Name="btEteindreLed"  Content="Eteindre les LED" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btEteindreLed_Click" />
-        
-        <TextBlock Text="Heure : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="135,10,0,0" />
-        <TextBlock x:Name="tbHeure" Text="12:00" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="181,10,0,0" />
+        <Button x:Name="btAllumerLed" Content="Allumer les LED" HorizontalAlignment="Left" Margin="10,10,0,0" 
+                VerticalAlignment="Top" Width="120" Height="36" Click="btAllumerLed_Click" />
+        <Button x:Name="btEteindreLed"  Content="Eteindre les LED" HorizontalAlignment="Left" Margin="10,51,0,0" 
+                VerticalAlignment="Top" Width="120" Height="36" Click="btEteindreLed_Click" />
+
+        <Button x:Name="btActivateBuzzer" Content="Activer l'alarme" HorizontalAlignment="Left" Margin="135,10,0,0" 
+                VerticalAlignment="Top" Width="120" Height="36" Click="btActivateBuzzer_Click" />
+        <Button x:Name="btDeactiveBuzzer"  Content="Désactiver l'alarme" HorizontalAlignment="Left" Margin="135,51,0,0" 
+                VerticalAlignment="Top" Width="120" Height="36" Click="btDeactiveBuzzer_Click" />
+
+        <!--<TextBlock Text="Heure : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="135,10,0,0" />
+        <TextBlock x:Name="tbHeure" Text="12:00" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="181,10,0,0" />-->
     </Grid>
 </Window>

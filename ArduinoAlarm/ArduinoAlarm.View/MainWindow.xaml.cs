@@ -42,5 +42,15 @@ namespace ArduinoAlarm.View
         {
             Arduino.SwitchLeds();
         }
+
+        private void btActivateBuzzer_Click(object sender, RoutedEventArgs e)
+        {
+            Arduino.SwitchBuzzer(true);
+        }
+
+        private void btDeactiveBuzzer_Click(object sender, RoutedEventArgs e)
+        {
+            Arduino.SwitchBuzzer();
+        }
     }
 }
