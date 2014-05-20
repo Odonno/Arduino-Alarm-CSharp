@@ -52,6 +52,7 @@
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -92,6 +93,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArduinoAlarm.Model\ArduinoAlarm.Model.csproj">
+      <Project>{02f3e249-94b1-460b-89ca-015c95d79578}</Project>
+      <Name>ArduinoAlarm.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArduinoAlarm.ViewModel\ArduinoAlarm.ViewModel.csproj">
+      <Project>{7fe392b0-2916-44a1-9d3f-b7ee09bac0a0}</Project>
+      <Name>ArduinoAlarm.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

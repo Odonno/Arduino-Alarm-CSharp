@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Button x:Name="btAllumerLed" Content="Allumer les LED" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btAllumerLed_Click" />
+        <Button x:Name="btEteindreLed"  Content="Eteindre les LED" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btEteindreLed_Click" />
     </Grid>
 </Window>
