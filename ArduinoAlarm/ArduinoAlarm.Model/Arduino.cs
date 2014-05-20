@@ -26,6 +26,9 @@ namespace ArduinoAlarm.Model
 
         #region Methods
         
+        /// <summary>
+        /// command 1
+        /// </summary>
         public void SendDate()
         {
             SerialPort.Open();
@@ -42,6 +45,10 @@ namespace ArduinoAlarm.Model
             SerialPort.Close();
         }
 
+        /// <summary>
+        /// Command 2
+        /// </summary>
+        /// <param name="on"></param>
         public void SwitchBuzzer(bool on = false)
         {
             SerialPort.Open();
@@ -53,7 +60,33 @@ namespace ArduinoAlarm.Model
 
             SerialPort.Close();
         }
+        
+        /// <summary>
+        /// command 3
+        /// </summary>
+        public void PlanAlarm(DateTime Debut, DateTime Fin)
+        {
+            SerialPort.Open();
 
+            SerialPort.Write(new[] { (byte)3 }, 0, 1);
+
+            SerialPort.WriteLine(Debut.Hour.ToString());
+            SerialPort.WriteLine(Debut.Minute.ToString());
+            SerialPort.WriteLine(Debut.Second.ToString());
+            SerialPort.WriteLine(Debut.Millisecond.ToString());
+
+            SerialPort.WriteLine(Fin.Hour.ToString());
+            SerialPort.WriteLine(Fin.Minute.ToString());
+            SerialPort.WriteLine(Fin.Second.ToString());
+            SerialPort.WriteLine(Fin.Millisecond.ToString());
+
+            SerialPort.Close();
+        }
+
+        /// <summary>
+        /// command 4
+        /// </summary>
+        /// <param name="password"></param>
         public void SetPassword(string password)
         {
             SerialPort.Open();
@@ -67,6 +100,10 @@ namespace ArduinoAlarm.Model
             SerialPort.Close();
         }
 
+        /// <summary>
+        /// command 7
+        /// </summary>
+        /// <param name="on"></param>
         public void SwitchLeds(bool on = false)
         {
             SerialPort.Open();

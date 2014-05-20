@@ -57,5 +57,12 @@ namespace ArduinoAlarm.View
         {
             Arduino.SetPassword(tbPassword.Text);
         }
+
+        private void btPlanAlarm_Click(object sender, RoutedEventArgs e)
+        {
+            Arduino.PlanAlarm(DateTime.Parse(tbDateDebut.Text), DateTime.Parse(tbDateFin.Text));
+        }
+
+       
     }
 }
