@@ -8,7 +8,7 @@ namespace ArduinoAlarm.Model
         #region Properties
 
         public SerialPort SerialPort { get; private set; }
-        public const string COMport = "COM5";
+        public const string COMport = "COM4";
         public const int BaudRate = 9600;
 
         #endregion
@@ -25,7 +25,7 @@ namespace ArduinoAlarm.Model
 
 
         #region Methods
-        
+
         /// <summary>
         /// command 1
         /// </summary>
@@ -60,10 +60,12 @@ namespace ArduinoAlarm.Model
 
             SerialPort.Close();
         }
-        
+
         /// <summary>
-        /// command 3
+        /// Command 3
         /// </summary>
+        /// <param name="Debut"></param>
+        /// <param name="Fin"></param>
         public void PlanAlarm(DateTime Debut, DateTime Fin)
         {
             SerialPort.Open();
@@ -96,6 +98,47 @@ namespace ArduinoAlarm.Model
 
             // Send password
             SerialPort.WriteLine(password);
+
+            SerialPort.Close();
+        }
+        /// <summary>
+        /// command 5
+        /// </summary>
+        /// <returns></returns>
+        public string AYA()
+        {
+            string retour;
+            try
+            {
+                SerialPort.Open();
+
+                SerialPort.Write(new[] { (byte)5 }, 0, 1);
+
+                retour = SerialPort.ReadLine();
+            }
+            catch (Exception e)
+            {
+                retour = "I am not alive";
+            }
+            finally
+            {
+                SerialPort.Close();
+            }
+
+            return retour;
+        }
+
+        /// <summary>
+        /// command 6
+        /// </summary>
+        /// <param name="sec"></param>
+        public void delaiAlarm(int sec)
+        {
+            SerialPort.Open();
+
+            SerialPort.Write(new[] { (byte) 6}, 0, 1);
+
+            SerialPort.WriteLine(sec.ToString());
 
             SerialPort.Close();
         }

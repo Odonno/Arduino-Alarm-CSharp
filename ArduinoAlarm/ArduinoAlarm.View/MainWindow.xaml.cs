@@ -63,6 +63,16 @@ namespace ArduinoAlarm.View
             Arduino.PlanAlarm(DateTime.Parse(tbDateDebut.Text), DateTime.Parse(tbDateFin.Text));
         }
 
+        private void btAYA_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(Arduino.AYA());
+        }
+
+        private void btDelai_Click(object sender, RoutedEventArgs e)
+        {
+            Arduino.delaiAlarm(int.Parse(tbDelai.Text));
+        }
+
        
     }
 }
