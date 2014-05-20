@@ -16,11 +16,11 @@
         <TextBox x:Name="tbPassword" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188" Margin="10,92,0,0" Height="36" />
         <Button x:Name="btSetPassword" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Modifier le mot de passe"
                 Width="168" Height="36" Margin="203,92,0,0" Click="btSetPassword_Click" />
-        <TextBox x:Name="tbDateDebut" HorizontalAlignment="Left" Height="35" Margin="10,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbDateFin" HorizontalAlignment="Left" Height="35" Margin="135,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbDateDebut" HorizontalAlignment="Left" Height="35" Margin="10,133,0,0" TextWrapping="Wrap" Text="17:10:00" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbDateFin" HorizontalAlignment="Left" Height="35" Margin="135,133,0,0" TextWrapping="Wrap" Text="17:40:00" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btPlanAlarm" Content="Planifier l'alarme" HorizontalAlignment="Left" Height="35" Margin="260,133,0,0" VerticalAlignment="Top" Width="111" Click="btPlanAlarm_Click"/>
         <Button x:Name="btAYA" Content="Are you alive?" HorizontalAlignment="Left" Height="36" Margin="260,10,0,0" VerticalAlignment="Top" Width="111" Click="btAYA_Click"/>
-        <TextBox x:Name="tbDelai" HorizontalAlignment="Left" Height="36" Margin="260,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34"/>
-        <Button x:Name="btDelai" Content="Delai" HorizontalAlignment="Left" Height="36" Margin="299,51,0,0" VerticalAlignment="Top" Width="72" Click="btDelai_Click"/>
+        <TextBox x:Name="tbDelai" HorizontalAlignment="Left" Height="36" Margin="337,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34"/>
+        <Button x:Name="btDelai" Content="Delai" HorizontalAlignment="Left" Height="36" Margin="260,51,0,0" VerticalAlignment="Top" Width="72" Click="btDelai_Click"/>
     </Grid>
 </Window>

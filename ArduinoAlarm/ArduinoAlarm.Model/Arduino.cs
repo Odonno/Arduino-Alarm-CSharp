@@ -82,7 +82,9 @@ namespace ArduinoAlarm.Model
             SerialPort.WriteLine(Fin.Second.ToString());
             SerialPort.WriteLine(Fin.Millisecond.ToString());
 
+
             SerialPort.Close();
+
         }
 
         /// <summary>
