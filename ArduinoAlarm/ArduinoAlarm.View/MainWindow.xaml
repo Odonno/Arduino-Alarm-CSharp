@@ -1,9 +1,32 @@
 ﻿<Window x:Class="ArduinoAlarm.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>-->
+
+        <!--<Grid Grid.Row="0" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" x:Name="tbCOMport" Text="{Binding Path=Arduino.}" Margin="10" />
+            <TextBox Grid.Column="1" x:Name="tbBaudRate" Margin="10"  />
+        </Grid>-->
+
+        <!--<Grid Grid.Row="1" Margin="10">
+            <Button x:Name="btAllumerLed" Content="Allumer les LED" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btAllumerLed_Click" />
+            <Button x:Name="btEteindreLed"  Content="Eteindre les LED" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btEteindreLed_Click" />
+        </Grid>-->
+
         <Button x:Name="btAllumerLed" Content="Allumer les LED" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btAllumerLed_Click" />
         <Button x:Name="btEteindreLed"  Content="Eteindre les LED" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="btEteindreLed_Click" />
+        
+        <TextBlock Text="Heure : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="135,10,0,0" />
+        <TextBlock x:Name="tbHeure" Text="12:00" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="181,10,0,0" />
     </Grid>
 </Window>

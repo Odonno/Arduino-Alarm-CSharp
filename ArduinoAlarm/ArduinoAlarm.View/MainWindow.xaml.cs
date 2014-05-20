@@ -22,33 +22,25 @@ namespace ArduinoAlarm.View
     public partial class MainWindow : Window
     {
         private readonly Arduino _arduino = new Arduino();
+        public Arduino Arduino { get { return _arduino; } }
 
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Arduino.SendDate();
         }
 
 
         private void btAllumerLed_Click(object sender, RoutedEventArgs e)
         {
-            SwitchLeds(true);
+            Arduino.SwitchLeds(true);
         }
 
         private void btEteindreLed_Click(object sender, RoutedEventArgs e)
         {
-            SwitchLeds();
-        }
-
-        private void SwitchLeds(bool on = false)
-        {
-            _arduino.SerialPort.Open();
-            byte onByte = on ? (byte)1 : (byte)0;
-
-            for (byte i = 5; i < 8; i++)
-                _arduino.SerialPort.Write(new [] { i, onByte }, 0, 2);
-
-            _arduino.SerialPort.Close();
+            Arduino.SwitchLeds();
         }
     }
 }
