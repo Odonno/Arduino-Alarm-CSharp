@@ -52,5 +52,10 @@ namespace ArduinoAlarm.View
         {
             Arduino.SwitchBuzzer();
         }
+
+        private void btSetPassword_Click(object sender, RoutedEventArgs e)
+        {
+            Arduino.SetPassword(tbPassword.Text);
+        }
     }
 }

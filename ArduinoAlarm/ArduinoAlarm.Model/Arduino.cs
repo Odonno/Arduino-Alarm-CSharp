@@ -54,6 +54,19 @@ namespace ArduinoAlarm.Model
             SerialPort.Close();
         }
 
+        public void SetPassword(string password)
+        {
+            SerialPort.Open();
+
+            // Send command byte
+            SerialPort.Write(new[] { (byte)4 }, 0, 1);
+
+            // Send password
+            SerialPort.WriteLine(password);
+
+            SerialPort.Close();
+        }
+
         public void SwitchLeds(bool on = false)
         {
             SerialPort.Open();
