@@ -27,7 +27,7 @@ namespace ArduinoAlarm.Model
         #region Methods
 
         /// <summary>
-        /// command 1
+        /// Command 1
         /// </summary>
         public void SendDate()
         {
@@ -64,31 +64,30 @@ namespace ArduinoAlarm.Model
         /// <summary>
         /// Command 3
         /// </summary>
-        /// <param name="Debut"></param>
-        /// <param name="Fin"></param>
-        public void PlanAlarm(DateTime Debut, DateTime Fin)
+        /// <param name="debut"></param>
+        /// <param name="fin"></param>
+        public void PlanAlarm(DateTime debut, DateTime fin)
         {
             SerialPort.Open();
 
             SerialPort.Write(new[] { (byte)3 }, 0, 1);
 
-            SerialPort.WriteLine(Debut.Hour.ToString());
-            SerialPort.WriteLine(Debut.Minute.ToString());
-            SerialPort.WriteLine(Debut.Second.ToString());
-            SerialPort.WriteLine(Debut.Millisecond.ToString());
+            SerialPort.WriteLine(debut.Hour.ToString());
+            SerialPort.WriteLine(debut.Minute.ToString());
+            SerialPort.WriteLine(debut.Second.ToString());
+            SerialPort.WriteLine(debut.Millisecond.ToString());
 
-            SerialPort.WriteLine(Fin.Hour.ToString());
-            SerialPort.WriteLine(Fin.Minute.ToString());
-            SerialPort.WriteLine(Fin.Second.ToString());
-            SerialPort.WriteLine(Fin.Millisecond.ToString());
+            SerialPort.WriteLine(fin.Hour.ToString());
+            SerialPort.WriteLine(fin.Minute.ToString());
+            SerialPort.WriteLine(fin.Second.ToString());
+            SerialPort.WriteLine(fin.Millisecond.ToString());
 
 
             SerialPort.Close();
-
         }
 
         /// <summary>
-        /// command 4
+        /// Command 4
         /// </summary>
         /// <param name="password"></param>
         public void SetPassword(string password)
@@ -103,13 +102,15 @@ namespace ArduinoAlarm.Model
 
             SerialPort.Close();
         }
+
         /// <summary>
-        /// command 5
+        /// Command 5
         /// </summary>
         /// <returns></returns>
-        public string AYA()
+        public string AreYouAlive()
         {
             string retour;
+
             try
             {
                 SerialPort.Open();
@@ -118,7 +119,7 @@ namespace ArduinoAlarm.Model
 
                 retour = SerialPort.ReadLine();
             }
-            catch (Exception e)
+            catch
             {
                 retour = "I am not alive";
             }
@@ -131,22 +132,22 @@ namespace ArduinoAlarm.Model
         }
 
         /// <summary>
-        /// command 6
+        /// Command 6
         /// </summary>
-        /// <param name="sec"></param>
-        public void delaiAlarm(int sec)
+        /// <param name="seconds"></param>
+        public void DelaiAlarm(int seconds)
         {
             SerialPort.Open();
 
             SerialPort.Write(new[] { (byte) 6}, 0, 1);
 
-            SerialPort.WriteLine(sec.ToString());
+            SerialPort.WriteLine(seconds.ToString());
 
             SerialPort.Close();
         }
 
         /// <summary>
-        /// command 7
+        /// Command 7
         /// </summary>
         /// <param name="on"></param>
         public void SwitchLeds(bool on = false)

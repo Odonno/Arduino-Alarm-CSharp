@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ArduinoAlarm.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        Title="MainWindow" Height="214" Width="525" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid x:Name="btSendDate">
         <Button x:Name="btAllumerLed" Content="Allumer les LED" HorizontalAlignment="Left" Margin="10,10,0,0" 
                 VerticalAlignment="Top" Width="120" Height="36" Click="btAllumerLed_Click" />
@@ -22,5 +22,6 @@
         <Button x:Name="btAYA" Content="Are you alive?" HorizontalAlignment="Left" Height="36" Margin="260,10,0,0" VerticalAlignment="Top" Width="111" Click="btAYA_Click"/>
         <TextBox x:Name="tbDelai" HorizontalAlignment="Left" Height="36" Margin="337,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34"/>
         <Button x:Name="btDelai" Content="Delai" HorizontalAlignment="Left" Height="36" Margin="260,51,0,0" VerticalAlignment="Top" Width="72" Click="btDelai_Click"/>
+        <Button x:Name="btSOS" Content="SOS" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="376,10,0,0" Height="158" Width="131" Click="btSOS_Click" />
     </Grid>
 </Window>

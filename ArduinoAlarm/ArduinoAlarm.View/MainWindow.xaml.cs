@@ -65,14 +65,25 @@ namespace ArduinoAlarm.View
 
         private void btAYA_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Arduino.AYA());
+            MessageBox.Show(Arduino.AreYouAlive());
         }
 
         private void btDelai_Click(object sender, RoutedEventArgs e)
         {
-            Arduino.delaiAlarm(int.Parse(tbDelai.Text));
+            Arduino.DelaiAlarm(int.Parse(tbDelai.Text));
         }
 
-       
+        private void btSOS_Click(object sender, RoutedEventArgs e)
+        {
+            var sosMail = new Mail
+            {
+                From = "bottiau.david@laposte.net",
+                To = "david.bottiau@epsi.fr",
+                Subject = "SOS !",
+                Body = "SOS !",
+            };
+
+            sosMail.Send();
+        }
     }
 }
