@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace ArduinoAlarm.Model
 {
@@ -12,20 +13,17 @@ namespace ArduinoAlarm.Model
 
 
 
-        public void Send()
+        public async Task Send()
         {
             using (var message = new MailMessage { Body = Body, From = new MailAddress(From), Subject = Subject })
             {
                 message.To.Add(To);
 
-                using (var smtp = new SmtpClient("smtp.gmail.com") { EnableSsl = true,Credentials = new NetworkCredential("dupuispbaptiste@gmail.com", "1234abcdE") })
+                using (var smtp = new SmtpClient("smtp.gmail.com") { EnableSsl = true, Credentials = new NetworkCredential("dupuispbaptiste@gmail.com", "1234abcdE") })
                 {
-                    smtp.Send(message);
-                    //smtp.SendAsync(message, null);
+                    await smtp.SendMailAsync(message);
                 }
             }
         }
-
-
     }
 }

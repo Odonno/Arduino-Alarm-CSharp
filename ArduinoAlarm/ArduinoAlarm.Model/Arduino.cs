@@ -9,6 +9,7 @@ namespace ArduinoAlarm.Model
         #region Fields
 
         private Timer _detectTimer;
+        private readonly object _lock = new object();
 
         #endregion
 
@@ -16,7 +17,7 @@ namespace ArduinoAlarm.Model
         #region Properties
 
         public SerialPort SerialPort { get; private set; }
-        public const string COMport = "COM4";
+        public const string COMport = "COM5";
         public const int BaudRate = 9600;
 
         #endregion
@@ -39,18 +40,21 @@ namespace ArduinoAlarm.Model
         /// </summary>
         public void SendDate()
         {
-            SerialPort.Open();
+            lock (_lock)
+            {
+                SerialPort.Open();
 
-            // Send command byte
-            SerialPort.Write(new[] { (byte)1 }, 0, 1);
+                // Send command byte
+                SerialPort.Write(new[] { (byte)1 }, 0, 1);
 
-            // Send hours, minutes, seconds and milliseconds
-            SerialPort.WriteLine(DateTime.Now.Hour.ToString());
-            SerialPort.WriteLine(DateTime.Now.Minute.ToString());
-            SerialPort.WriteLine(DateTime.Now.Second.ToString());
-            SerialPort.WriteLine(DateTime.Now.Millisecond.ToString());
+                // Send hours, minutes, seconds and milliseconds
+                SerialPort.WriteLine(DateTime.Now.Hour.ToString());
+                SerialPort.WriteLine(DateTime.Now.Minute.ToString());
+                SerialPort.WriteLine(DateTime.Now.Second.ToString());
+                SerialPort.WriteLine(DateTime.Now.Millisecond.ToString());
 
-            SerialPort.Close();
+                SerialPort.Close();
+            }
         }
 
         /// <summary>
@@ -59,14 +63,17 @@ namespace ArduinoAlarm.Model
         /// <param name="on"></param>
         public void SwitchBuzzer(bool on = false)
         {
-            SerialPort.Open();
+            lock (_lock)
+            {
+                SerialPort.Open();
 
-            byte onByte = on ? (byte)1 : (byte)0;
+                byte onByte = on ? (byte)1 : (byte)0;
 
-            // Send command byte + boolean byte
-            SerialPort.Write(new[] { (byte)2, onByte }, 0, 2);
+                // Send command byte + boolean byte
+                SerialPort.Write(new[] { (byte)2, onByte }, 0, 2);
 
-            SerialPort.Close();
+                SerialPort.Close();
+            }
         }
 
         /// <summary>
@@ -76,22 +83,25 @@ namespace ArduinoAlarm.Model
         /// <param name="fin"></param>
         public void PlanAlarm(DateTime debut, DateTime fin)
         {
-            SerialPort.Open();
+            lock (_lock)
+            {
+                SerialPort.Open();
 
-            SerialPort.Write(new[] { (byte)3 }, 0, 1);
+                SerialPort.Write(new[] { (byte)3 }, 0, 1);
 
-            SerialPort.WriteLine(debut.Hour.ToString());
-            SerialPort.WriteLine(debut.Minute.ToString());
-            SerialPort.WriteLine(debut.Second.ToString());
-            SerialPort.WriteLine(debut.Millisecond.ToString());
+                SerialPort.WriteLine(debut.Hour.ToString());
+                SerialPort.WriteLine(debut.Minute.ToString());
+                SerialPort.WriteLine(debut.Second.ToString());
+                SerialPort.WriteLine(debut.Millisecond.ToString());
 
-            SerialPort.WriteLine(fin.Hour.ToString());
-            SerialPort.WriteLine(fin.Minute.ToString());
-            SerialPort.WriteLine(fin.Second.ToString());
-            SerialPort.WriteLine(fin.Millisecond.ToString());
+                SerialPort.WriteLine(fin.Hour.ToString());
+                SerialPort.WriteLine(fin.Minute.ToString());
+                SerialPort.WriteLine(fin.Second.ToString());
+                SerialPort.WriteLine(fin.Millisecond.ToString());
 
 
-            SerialPort.Close();
+                SerialPort.Close();
+            }
         }
 
         /// <summary>
@@ -100,15 +110,18 @@ namespace ArduinoAlarm.Model
         /// <param name="password"></param>
         public void SetPassword(string password)
         {
-            SerialPort.Open();
+            lock (_lock)
+            {
+                SerialPort.Open();
 
-            // Send command byte
-            SerialPort.Write(new[] { (byte)4 }, 0, 1);
+                // Send command byte
+                SerialPort.Write(new[] { (byte)4 }, 0, 1);
 
-            // Send password
-            SerialPort.WriteLine(password);
+                // Send password
+                SerialPort.WriteLine(password);
 
-            SerialPort.Close();
+                SerialPort.Close();
+            }
         }
 
         /// <summary>
@@ -119,23 +132,26 @@ namespace ArduinoAlarm.Model
         {
             string retour;
 
-            try
+            lock (_lock)
             {
-                SerialPort.Open();
+                try
+                {
 
-                SerialPort.Write(new[] { (byte)5 }, 0, 1);
+                    SerialPort.Open();
 
-                retour = SerialPort.ReadLine();
-            }
-            catch
-            {
-                retour = "I am not alive";
-            }
-            finally
-            {
-                SerialPort.Close();
-            }
+                    SerialPort.Write(new[] { (byte)5 }, 0, 1);
 
+                    retour = SerialPort.ReadLine();
+                }
+                catch
+                {
+                    retour = "I am not alive";
+                }
+                finally
+                {
+                    SerialPort.Close();
+                }
+            }
             return retour;
         }
 
@@ -145,13 +161,16 @@ namespace ArduinoAlarm.Model
         /// <param name="seconds"></param>
         public void DelaiAlarm(int seconds)
         {
-            SerialPort.Open();
+            lock (_lock)
+            {
+                SerialPort.Open();
 
-            SerialPort.Write(new[] { (byte)6 }, 0, 1);
+                SerialPort.Write(new[] { (byte)6 }, 0, 1);
 
-            SerialPort.WriteLine(seconds.ToString());
+                SerialPort.WriteLine(seconds.ToString());
 
-            SerialPort.Close();
+                SerialPort.Close();
+            }
         }
 
         /// <summary>
@@ -160,52 +179,55 @@ namespace ArduinoAlarm.Model
         /// <param name="on"></param>
         public void SwitchLeds(bool on = false)
         {
-            SerialPort.Open();
+            lock (_lock)
+            {
+                SerialPort.Open();
 
-            byte onByte = on ? (byte)1 : (byte)0;
+                byte onByte = on ? (byte)1 : (byte)0;
 
-            // Send command byte + boolean byte
-            SerialPort.Write(new[] { (byte)7, onByte }, 0, 2);
+                // Send command byte + boolean byte
+                SerialPort.Write(new[] { (byte)7, onByte }, 0, 2);
 
-            SerialPort.Close();
+                SerialPort.Close();
+            }
         }
 
         public void Detect()
         {
-            _detectTimer = new Timer(delegate
+            _detectTimer = new Timer(async delegate
             {
-                SerialPort.Open();
-                string line = SerialPort.ReadLine();
-
-                // Check if any intrusion is send, and send a mail
-                if (line == "INT")
+                var mail = new Mail
                 {
-                    var intrusionMail = new Mail
-                    {
-                        From = "bottiau.david@laposte.net",
-                        To = "david.bottiau@epsi.fr",
-                        Subject = "Intrusion detected !",
-                        Body = "Intrusion detected !",
-                    };
+                    From = "bottiau.david@laposte.net",
+                    To = "david.bottiau@epsi.fr"
+                };
 
-                    intrusionMail.Send();
+                lock (_lock)
+                {
+                    SerialPort.Open();
+
+                    string line = SerialPort.ReadLine();
+
+                    // Check if any intrusion is send, and send a mail
+                    if (line == "INT")
+                    {
+                        mail.Subject = "Intrusion detected !";
+                        mail.Body = "Intrusion detected !";
+                    }
+
+                        // Check if any SOS is send, and send a mail
+                    else if (line == "SOS")
+                    {
+                        mail.Subject = "SOS !";
+                        mail.Body = "SOS !";
+                    }
+
+                    SerialPort.Close();
                 }
 
-                // Check if any SOS is send, and send a mail
-                else if (line == "SOS")
-                {
-                    var sosMail = new Mail
-                    {
-                        From = "bottiau.david@laposte.net",
-                        To = "david.bottiau@epsi.fr",
-                        Subject = "SOS !",
-                        Body = "SOS !",
-                    };
+                await mail.Send();
 
-                    sosMail.Send();
-                }
-                SerialPort.Close();
-            }, null, 0, 500);
+            }, null, 0, 5000);
         }
 
         #endregion
