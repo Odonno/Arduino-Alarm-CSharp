@@ -1,10 +1,18 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Threading;
 
 namespace ArduinoAlarm.Model
 {
     public class Arduino
     {
+        #region Fields
+
+        private Timer _detectTimer;
+
+        #endregion
+
+
         #region Properties
 
         public SerialPort SerialPort { get; private set; }
@@ -36,7 +44,7 @@ namespace ArduinoAlarm.Model
             // Send command byte
             SerialPort.Write(new[] { (byte)1 }, 0, 1);
 
-            // Send hour, minutes, seconds and milliseconds
+            // Send hours, minutes, seconds and milliseconds
             SerialPort.WriteLine(DateTime.Now.Hour.ToString());
             SerialPort.WriteLine(DateTime.Now.Minute.ToString());
             SerialPort.WriteLine(DateTime.Now.Second.ToString());
@@ -139,7 +147,7 @@ namespace ArduinoAlarm.Model
         {
             SerialPort.Open();
 
-            SerialPort.Write(new[] { (byte) 6}, 0, 1);
+            SerialPort.Write(new[] { (byte)6 }, 0, 1);
 
             SerialPort.WriteLine(seconds.ToString());
 
@@ -160,6 +168,42 @@ namespace ArduinoAlarm.Model
             SerialPort.Write(new[] { (byte)7, onByte }, 0, 2);
 
             SerialPort.Close();
+        }
+
+        public void Detect()
+        {
+            _detectTimer = new Timer(delegate
+            {
+                string line = SerialPort.ReadLine();
+
+                // Check if any intrusion is send, and send a mail
+                if (line == "INT")
+                {
+                    var intrusionMail = new Mail
+                    {
+                        From = "bottiau.david@laposte.net",
+                        To = "david.bottiau@epsi.fr",
+                        Subject = "Intrusion detected !",
+                        Body = "Intrusion detected !",
+                    };
+
+                    intrusionMail.Send();
+                }
+
+                // Check if any SOS is send, and send a mail
+                else if (line == "SOS")
+                {
+                    var sosMail = new Mail
+                    {
+                        From = "bottiau.david@laposte.net",
+                        To = "david.bottiau@epsi.fr",
+                        Subject = "SOS !",
+                        Body = "SOS !",
+                    };
+
+                    sosMail.Send();
+                }
+            }, null, 0, 500);
         }
 
         #endregion

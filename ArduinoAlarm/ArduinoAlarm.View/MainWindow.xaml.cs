@@ -30,6 +30,7 @@ namespace ArduinoAlarm.View
             InitializeComponent();
 
             Arduino.SendDate();
+            Arduino.Detect();
         }
 
 
@@ -71,19 +72,6 @@ namespace ArduinoAlarm.View
         private void btDelai_Click(object sender, RoutedEventArgs e)
         {
             Arduino.DelaiAlarm(int.Parse(tbDelai.Text));
-        }
-
-        private void btSOS_Click(object sender, RoutedEventArgs e)
-        {
-            var sosMail = new Mail
-            {
-                From = "bottiau.david@laposte.net",
-                To = "david.bottiau@epsi.fr",
-                Subject = "SOS !",
-                Body = "SOS !",
-            };
-
-            sosMail.Send();
         }
     }
 }

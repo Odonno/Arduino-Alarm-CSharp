@@ -21,6 +21,7 @@ namespace ArduinoAlarm.Model
                 using (var smtp = new SmtpClient("smtp.laposte.net") { Credentials = new NetworkCredential("username", "password") })
                 {
                     smtp.Send(message);
+                    //smtp.SendAsync(message, null);
                 }
             }
         }
