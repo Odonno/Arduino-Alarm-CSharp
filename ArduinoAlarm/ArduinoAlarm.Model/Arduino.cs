@@ -174,6 +174,7 @@ namespace ArduinoAlarm.Model
         {
             _detectTimer = new Timer(delegate
             {
+                SerialPort.Open();
                 string line = SerialPort.ReadLine();
 
                 // Check if any intrusion is send, and send a mail
@@ -203,6 +204,7 @@ namespace ArduinoAlarm.Model
 
                     sosMail.Send();
                 }
+                SerialPort.Close();
             }, null, 0, 500);
         }
 

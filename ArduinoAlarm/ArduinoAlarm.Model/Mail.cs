@@ -18,12 +18,14 @@ namespace ArduinoAlarm.Model
             {
                 message.To.Add(To);
 
-                using (var smtp = new SmtpClient("smtp.laposte.net") { Credentials = new NetworkCredential("username", "password") })
+                using (var smtp = new SmtpClient("smtp.gmail.com") { EnableSsl = true,Credentials = new NetworkCredential("dupuispbaptiste@gmail.com", "1234abcdE") })
                 {
                     smtp.Send(message);
                     //smtp.SendAsync(message, null);
                 }
             }
         }
+
+
     }
 }
