@@ -51,7 +51,7 @@ namespace ArduinoAlarm.View
 
         private void btDeactiveBuzzer_Click(object sender, RoutedEventArgs e)
         {
-            Arduino.SwitchBuzzer();
+            Arduino.SwitchBuzzer(false, tbdesPassword.Text);
         }
 
         private void btSetPassword_Click(object sender, RoutedEventArgs e)
