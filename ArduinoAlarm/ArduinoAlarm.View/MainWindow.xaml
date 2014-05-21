@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ArduinoAlarm.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="215" Width="396" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        Title="Alarm system" Height="215" Width="396" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid x:Name="btSendDate">
         <Button x:Name="btAllumerLed" Content="Allumer les LED" HorizontalAlignment="Left" Margin="10,10,0,0" 
                 VerticalAlignment="Top" Width="120" Height="36" Click="btAllumerLed_Click" />

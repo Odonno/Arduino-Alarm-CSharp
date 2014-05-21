@@ -196,38 +196,58 @@ namespace ArduinoAlarm.Model
         {
             _detectTimer = new Timer(async delegate
             {
-                var mail = new Mail
-                {
-                    From = "bottiau.david@laposte.net",
-                    To = "david.bottiau@epsi.fr"
-                };
+                _detectTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                Mail mail = null;
 
                 lock (_lock)
                 {
                     SerialPort.Open();
+                    SerialPort.ReadTimeout = 100;
 
-                    string line = SerialPort.ReadLine();
-
-                    // Check if any intrusion is send, and send a mail
-                    if (line == "INT")
+                    try
                     {
-                        mail.Subject = "Intrusion detected !";
-                        mail.Body = "Intrusion detected !";
-                    }
+                        string line = SerialPort.ReadLine();
+
+                        // Check if any intrusion is send, and send a mail
+                        if (line == "INT")
+                        {
+                            mail = new Mail
+                            {
+                                From = "bottiau.david@laposte.net",
+                                To = "david.bottiau@epsi.fr",
+                                Subject = "Intrusion detected !",
+                                Body = "Intrusion detected !"
+                            };
+                        }
 
                         // Check if any SOS is send, and send a mail
-                    else if (line == "SOS")
-                    {
-                        mail.Subject = "SOS !";
-                        mail.Body = "SOS !";
+                        else if (line == "SOS")
+                        {
+                            mail = new Mail
+                            {
+                                From = "bottiau.david@laposte.net",
+                                To = "david.bottiau@epsi.fr",
+                                Subject = "SOS !",
+                                Body = "SOS !"
+                            };
+                        }
                     }
-
-                    SerialPort.Close();
+                    catch
+                    {
+                        mail = null;
+                    }
+                    finally
+                    {
+                        SerialPort.Close();
+                    }
                 }
 
-                await mail.Send();
+                if (mail != null)
+                    await mail.Send();
 
-            }, null, 0, 5000);
+                _detectTimer.Change(0, 1000);
+
+            }, null, 0, 1000);
         }
 
         #endregion
