@@ -17,7 +17,7 @@ namespace ArduinoAlarm.Model
         #region Properties
 
         public SerialPort SerialPort { get; private set; }
-        public const string COMport = "COM4";
+        public const string COMport = "COM5";
         public const int BaudRate = 9600;
 
         #endregion
@@ -61,6 +61,7 @@ namespace ArduinoAlarm.Model
         /// Command 2
         /// </summary>
         /// <param name="on"></param>
+        /// <param name="mdp"></param>
         public void SwitchBuzzer(bool on = false, string mdp = null)
         {
             lock (_lock)
